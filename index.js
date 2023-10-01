@@ -21,27 +21,26 @@ const apiSpec = path.join(__dirname, 'api.yaml');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.text());
 app.use(express.json());
-
 app.use(logger('dev'));
 
-app.use('/spec', express.static(apiSpec));
 const openapiSpec = YAML.load(apiSpec);
 const openapiOp = {
     customSiteTitle: "YOUR TITLE",
     customfavIcon: "https://static.rawpixel.com/_next/static/images/rawpixel-1be0929918b5f1d29e326a3ad5357d2a.ico"
     // customCss: '.swagger-ui .topbar { display: none }',
-  };
+};
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(openapiSpec, openapiOp));
+app.use('/spec', express.static(apiSpec));
 
 //  2. Install the OpenApiValidator on your express app
 app.use(
-  OpenApiValidator.middleware({
-    apiSpec,
-    // validateRequests: true,
-    // validateResponses: true, // default false
-    // 3. Provide the base path to the operation handlers directory
-    operationHandlers: path.join(__dirname),
-  }),
+    OpenApiValidator.middleware({
+        apiSpec,
+        // validateRequests: true,
+        // validateResponses: true, // default false
+        // 3. Provide the base path to the operation handlers directory
+        operationHandlers: path.join(__dirname),
+    }),
 );
 
 // 4. Woah sweet! With auto-wired operation handlers, I don't have to declare my routes!
@@ -55,11 +54,11 @@ app.use((err, req, res, next) => {
     // 7. Customize errors
     console.error(err); // dump error to console for debug
     res.status(err.status || 500).json({
-      message: err.message,
-      errors: err.errors,
+        message: err.message,
+        errors: err.errors,
     });
-  });
-  
+});
+
 app.listen(port, () => {
-  console.log(`Server is listening on port ${port}`);
+    console.log(`Server is listening on port ${port}`);
 });
