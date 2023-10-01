@@ -46,9 +46,6 @@ app.use(
 // 4. Woah sweet! With auto-wired operation handlers, I don't have to declare my routes!
 //    See api.yaml for x-eov-* vendor extensions
 
-// http.createServer(app).listen(port);
-// console.log(`Listening on port ${port}`);
-
 // 6. Create an Express error handler
 app.use((err, req, res, next) => {
     // 7. Customize errors
@@ -59,6 +56,7 @@ app.use((err, req, res, next) => {
     });
 });
 
+// http.createServer(app).listen(port);
 app.listen(port, () => {
     console.log(`Server is listening on port ${port}`);
 });
