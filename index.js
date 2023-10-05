@@ -3,19 +3,17 @@
 
 // app.use(express.json());
 
-const express = require('express');
 const path = require('path');
-const bodyParser = require('body-parser');
-const logger = require('morgan');
-const http = require('http');
 const YAML = require('yamljs');
+const logger = require('morgan');
+const express = require('express');
+const bodyParser = require('body-parser');
 const swaggerUi = require('swagger-ui-express');
 const OpenApiValidator = require('express-openapi-validator');
 
-// const port = 3000;
 const app = express();
 const port = process.env.PORT || 3000;
-const apiSpec = path.join(__dirname, 'api.yaml');
+const apiSpec = path.join(__dirname, '/out/bundle-api.yaml');
 
 // 1. Install bodyParsers for the request types your API will support
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -56,7 +54,6 @@ app.use((err, req, res, next) => {
     });
 });
 
-// http.createServer(app).listen(port);
 app.listen(port, () => {
     console.log(`Server is listening on port ${port}`);
 });

@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "bundle-splitted-api-spec": "swagger-cli bundle api.yaml -o out/bundle-api.yaml -t yaml",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -15,11 +16,12 @@
     "express": "^4.18.2",
     "express-openapi-validator": "^5.0.6",
     "morgan": "^1.10.0",
+    "swagger-cli": "^4.0.4",
     "swagger-ui-express": "^5.0.0",
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
-    "swagger-parser": "^10.0.3",
-    "openapi-validator-middleware": "^3.2.6"
+    "openapi-validator-middleware": "^3.2.6",
+    "swagger-parser": "^10.0.3"
   }
 }
