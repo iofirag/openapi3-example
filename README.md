@@ -16,3 +16,4 @@ middleware
 
 
 # https://github.com/princekf/swagger-express-typescript
+# https://davidgarcia.dev/posts/how-to-split-open-api-spec-into-multiple-files/

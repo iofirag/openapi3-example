@@ -1,0 +1,8 @@
+tags:
+  - ping
+summary: Create data at endpoint 2
+x-eov-operation-handler: handlers/ping
+operationId: post_ping
+responses:
+  "201":
+    description: Data created successfully

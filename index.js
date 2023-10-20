@@ -1,10 +1,6 @@
-// const express = require('express');
-// const app = express();
-
-// app.use(express.json());
-
+const fs = require('fs');
 const path = require('path');
-const YAML = require('yamljs');
+const yaml = require('js-yaml');
 const logger = require('morgan');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -13,7 +9,6 @@ const OpenApiValidator = require('express-openapi-validator');
 
 const app = express();
 const port = process.env.PORT || 3000;
-const apiSpec = path.join(__dirname, '/out/bundle-api.yaml');
 
 // 1. Install bodyParsers for the request types your API will support
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -21,23 +16,21 @@ app.use(bodyParser.text());
 app.use(express.json());
 app.use(logger('dev'));
 
-const openapiSpec = YAML.load(apiSpec);
-const openapiOp = {
-    customSiteTitle: "YOUR TITLE",
-    customfavIcon: "https://static.rawpixel.com/_next/static/images/rawpixel-1be0929918b5f1d29e326a3ad5357d2a.ico"
-    // customCss: '.swagger-ui .topbar { display: none }',
-};
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(openapiSpec, openapiOp));
-app.use('/spec', express.static(apiSpec));
+// load new spec from file
+const apiSpecPath = path.join(__dirname, 'api-bundled.yaml');
+const apiSpecRoot = yaml.load(fs.readFileSync(apiSpecPath, 'utf8'));
+
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(apiSpecRoot));
+app.use('/spec', express.static(apiSpecPath));
 
 //  2. Install the OpenApiValidator on your express app
 app.use(
     OpenApiValidator.middleware({
-        apiSpec,
+        apiSpec: apiSpecPath,
+        // 3. Provide the base path to the operation handlers directory
+        operationHandlers: __dirname,
         // validateRequests: true,
         // validateResponses: true, // default false
-        // 3. Provide the base path to the operation handlers directory
-        operationHandlers: path.join(__dirname),
     }),
 );
 

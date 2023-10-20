@@ -1,0 +1,5 @@
+/ping:
+  get:
+    $ref: ./ping/ping-get.yaml
+  post:
+    $ref: ./ping/ping-post.yaml

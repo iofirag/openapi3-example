@@ -1,0 +1,8 @@
+tags:
+  - ping
+summary: Get data from endpoint 1
+x-eov-operation-handler: handlers/ping
+operationId: get_ping
+responses:
+  "200":
+    description: Successful response

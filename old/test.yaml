@@ -1,0 +1,18 @@
+openapi: 3.0.0
+info:
+  title: Sample API
+  version: 1.0.0
+
+paths:
+  /ping:
+    get:
+      tags:
+        - health
+      summary: Get data from endpoint 1
+      x-eov-operation-handler: handlers/ping
+      operationId: get_ping
+      responses:
+        '200':
+          description: Successful response
+
+components: {}
