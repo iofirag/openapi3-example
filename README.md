@@ -1,9 +1,9 @@
-V openapi 3 spec
-V api doc visualization
-V api validation
-V controller + operation 
-V split Swagger (OpenAPI) spec into multiple files
-middleware
+V openapi 3 spec  
+V api doc visualization  
+V api validation  
+V controller + operation  
+V split Swagger (OpenAPI) spec into multiple files  
+middleware  
 
 
 # run:
